@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-/** @see {@link https://nextui.org/docs/guide/installation#provider-setup} */
-import { NextUIProvider } from "@nextui-org/react";
+import { Providers } from "./providers";
 import "./globals.scss";
 
 export const metadata: Metadata = {
@@ -12,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja">
       <body>
-        <NextUIProvider>{children}</NextUIProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
