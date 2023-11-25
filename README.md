@@ -1,6 +1,22 @@
 # lounas-hub
 
-Admin tools for TEAM PIPLUP 🐧
+Admin tools for Dev. team 🐧
+
+## Conventions
+
+- [Contribution Guidelines](.github/CONTRIBUTING.md)
+- [Code of Conduct](.github/CODE_OF_CONDUCT.md)
+- [Security Policy](.github/SECURITY.md)
+
+For copy.
+
+```
+template=develop.md
+```
+
+```
+template=main.md
+```
 
 ## Development
 
@@ -48,39 +64,21 @@ You have to run `npm run format` before PR.
 
 [Docs](https://tailwindcss.com/docs/installation)
 
-### `tailwind.config.js`
-
-Support iOS 15.4 or later.
-
-```js
-module.exports = {
-  theme: {
-    extend: {
-      height: {
-        screen: ["100vh", "100dvh"],
-      },
-      minHeight: {
-        screen: ["100vh", "100dvh"],
-      },
-      maxHeight: {
-        screen: ["100vh", "100dvh"],
-      },
-    },
-  },
-};
-```
-
 ## Next.js
 
 [Docs](https://nextjs.org/docs)
 
-## Material UI
+## NextUI
 
-[Docs](https://mui.com/material-ui/getting-started/overview/)
+[Docs](https://nextui.org/docs/frameworks/nextjs)
 
 ## Framer Motion
 
 [Docs](https://www.framer.com/motion/)
+
+## React Hook Form
+
+[Docs](https://react-hook-form.com/docs)
 
 ## Prisma
 
@@ -88,13 +86,16 @@ module.exports = {
 
 ## Zod
 
-- [Docs - Zod](https://zod.dev/)
+[Docs](https://zod.dev/)
 
-- [ Docs - zod-prisma-types](https://github.com/chrishoermann/zod-prisma-types)
+### zod-prisma-types
+
+[Docs](https://github.com/chrishoermann/zod-prisma-types)
 
 ## Supabase
 
 [Docs](https://supabase.com/docs/reference/javascript/)
 
 ---
+
 🐧
