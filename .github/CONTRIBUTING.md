@@ -22,6 +22,19 @@ If you encounter a bug or have a feature request, please [open an issue](https:/
 4. Commit your changes: `git commit -m "Your descriptive commit message"`
 5. Push to the branch: `git push origin feature/your-work`
 6. Open a pull request on GitHub from your fork to the main repository.
+   - Please use the templates.
+
+#### develop branch
+
+```
+template=develop.md
+```
+
+#### main branch
+
+```
+template=main.md
+```
 
 Please make sure to follow the coding style and conventions used in the project. If your contribution involves changes to documentation, make sure to update the relevant documentation files.
 
