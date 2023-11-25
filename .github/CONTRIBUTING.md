@@ -19,6 +19,7 @@ If you encounter a bug or have a feature request, please [open an issue](https:/
 1. Fork the repository to your GitHub account.
 2. Create a new branch for your feature or bug fix: `git checkout -b feature/your-work`
 3. Make your changes and test them thoroughly.
+4. Run `npm run format` to check for errors.
 4. Commit your changes: `git commit -m "Your descriptive commit message"`
 5. Push to the branch: `git push origin feature/your-work`
 6. Open a pull request on GitHub from your fork to the main repository.
