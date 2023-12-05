@@ -80,6 +80,10 @@ You have to run `npm run format` before PR.
 
 [Docs](https://react-hook-form.com/docs)
 
+## SWR
+
+[Docs](https://swr.vercel.app/)
+
 ## Prisma
 
 [Docs](https://www.prisma.io/docs)
@@ -95,6 +99,16 @@ You have to run `npm run format` before PR.
 ## Supabase
 
 [Docs](https://supabase.com/docs/reference/javascript/)
+
+## Cloudinary
+
+- [Docs (Front)](https://next.cloudinary.dev/)
+- [Docs (Back)](https://cloudinary.com/documentation/node_integration)
+- [Uploading Images and Videos to Cloudinary Using Next.js Server-Side](https://cloudinary.com/blog/uploading-images-videos-next-js-server-side-multer-xata)
+
+## Nano ID
+
+[Docs](https://github.com/ai/nanoid)
 
 ---
 
