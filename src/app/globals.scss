@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  /* Due to the influence of NextUI, child elements of the body are wrapped, so need to nest selectors. */
+  & > div[data-overlay-container] {
+    @apply min-h-screen;
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 100%;
+  }
+}
