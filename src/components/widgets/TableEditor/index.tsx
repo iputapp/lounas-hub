@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
+import { usePathname, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import useSWR from "swr";
 
@@ -48,8 +49,22 @@ type TableEditorProps = {
     /** The resource URL to fetch */
     url: string;
   };
-  /** The header of the table */
+  /**
+   * The header of the table
+   * @description If the key is `actions`, the column of `ActionExpander` will be rendered.
+   * @example
+   * ```tsx
+   * <TableEditor<TypeOfSchema>
+   *   header={[{ key: "actions", label: "操作", align: "center" }]}
+   * />
+   * ```
+   */
   header: TableHeaderT[];
+  onAction?: {
+    detail?: boolean;
+    edit?: boolean;
+    delete?: boolean;
+  };
 };
 
 /**
@@ -60,6 +75,10 @@ type TableEditorProps = {
  * ```
  */
 export function TableEditor<T extends { id: string }>({ resource, header }: TableEditorProps) {
+  /** The router instance */
+  const router = useRouter();
+  /** The current pathname */
+  const pathname = usePathname();
   /** Pagination query */
   const [pagination, setPagination] = useState<PaginationParams>({ page: 1, limit: 50 });
   /** Search filter */
@@ -135,7 +154,7 @@ export function TableEditor<T extends { id: string }>({ resource, header }: Tabl
   // const loadingState = isLoading ? "loading" : "idle";
 
   /** The confirm modal state of the actions */
-  const { isOpen, onOpenChange, onOpen } = useDisclosure();
+  const { isOpen, onOpenChange, onOpen, onClose } = useDisclosure();
 
   /** Return the error component if the data fetching failed */
   if (error) {
@@ -146,14 +165,27 @@ export function TableEditor<T extends { id: string }>({ resource, header }: Tabl
     );
   }
 
+  /** Handle the delete action */
+  const handleDelete = () => {
+    const id = selectedKeys === "all" ? selectedKeys : Array.from(selectedKeys)[0];
+    console.log("Delete", id);
+    onClose();
+  };
+
   /** Handle the actions */
-  const actionHandler = (key: ActionType) => {
+  const actionHandler = (key: ActionType, id: string) => {
+    /** The current parent path */
+    const currentParentPath = pathname.split("/").slice(0, -1).join("/");
+    /** Switch the action by the key */
     switch (key) {
       case "detail":
-        return alert("detail");
+        console.log("Detail", id);
+        return router.push(`${currentParentPath}/${id}`);
       case "edit":
-        return alert("edit");
+        console.log("Edit", id);
+        return router.push(`${currentParentPath}/${id}?edit=1`);
       case "delete":
+        setSelectedKeys(new Set([id]));
         return onOpen();
     }
   };
@@ -161,7 +193,7 @@ export function TableEditor<T extends { id: string }>({ resource, header }: Tabl
   return (
     <>
       <Table
-        aria-label=""
+        aria-label="Table"
         isHeaderSticky
         isStriped
         selectionMode="multiple"
@@ -184,7 +216,7 @@ export function TableEditor<T extends { id: string }>({ resource, header }: Tabl
             {data?.count && (
               <div className="flex w-32 flex-wrap items-center justify-start space-x-1 text-sm text-neutral-500">
                 <span>選択:</span>
-                <span>{selectedKeys === "all" ? data.count : selectedKeys.size}</span>
+                <span>{selectedKeys === "all" ? filteredItems.length : selectedKeys.size}</span>
                 <span>件</span>
                 <span>/</span>
                 <span>{data.count}</span>
@@ -235,7 +267,9 @@ export function TableEditor<T extends { id: string }>({ resource, header }: Tabl
               {(columnKey) =>
                 columnKey === "actions" ? (
                   <TableCell>
-                    <ActionExpander handleAction={(key) => actionHandler(key as ActionType)} />
+                    <ActionExpander
+                      handleAction={(key) => actionHandler(key as ActionType, item.id)}
+                    />
                   </TableCell>
                 ) : (
                   <TableCell>{getKeyValue(item, columnKey) ?? "N/A"}</TableCell>
@@ -250,7 +284,11 @@ export function TableEditor<T extends { id: string }>({ resource, header }: Tabl
         buttonSettings={{
           confirm: {
             label: "削除",
-            props: { color: "danger", variant: "light", onPress: (e) => alert(e) },
+            props: {
+              color: "danger",
+              variant: "light",
+              onPress: () => handleDelete(),
+            },
           },
           cancel: {
             label: "キャンセル",
@@ -260,7 +298,7 @@ export function TableEditor<T extends { id: string }>({ resource, header }: Tabl
         size="xs"
       >
         <div className="grid place-content-center py-2">
-          <p>削除しますか？</p>
+          <p>本当に削除しますか？</p>
         </div>
       </ConfirmModal>
     </>
